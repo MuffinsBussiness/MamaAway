@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "307046951127",
+    "firebase_url": "https://mamaaway-bda95.firebaseio.com",
+    "project_id": "mamaaway-bda95",
+    "storage_bucket": "mamaaway-bda95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307046951127:android:75ce0fbf02a94716",
+        "android_client_info": {
+          "package_name": "com.example.toni.mamaaway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307046951127-i7ager88n6b1t9dp9106dfmo1j33r1d5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toni.mamaaway",
+            "certificate_hash": "f481dc19a9a63523a535573f2e14f5898bb80b6b"
+          }
+        },
+        {
+          "client_id": "307046951127-rc7scm698nj995lg3uqquhnbr8f89ks3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK-VfujWCwEBq3M5PlQasYx7ym8nLYQms"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307046951127-rc7scm698nj995lg3uqquhnbr8f89ks3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
