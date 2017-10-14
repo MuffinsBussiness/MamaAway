@@ -10,10 +10,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    DatabaseReference myRef = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         //myRef.setValue("Hello World!");
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        /*myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
@@ -33,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Log.w("MOCO", "Failed to read value.", databaseError.toException());
             }
-        });
+        });*/
+
+        List<Producto> productos = new ArrayList<Producto>();
+        Producto producto = new Producto("Leches", 5, "Cristian", 5.5);
+        productos.add(producto);
+
+        String key = myRef.child("productos").push().getKey();
+        myRef.child("productos").child(key).setValue(productos);
+
     }
 }
