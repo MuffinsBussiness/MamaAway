@@ -64,9 +64,12 @@ public class Tarea {
         this.fechaFinal = fechaFinal;
     }
 
-    public void saveIntoFirebase(DatabaseReference databaseReference) {
-        String key = databaseReference.child("tareas").push().getKey();
-        databaseReference.child("tareas").child(key).setValue(this);
+    public static void saveIntoFirebase(DatabaseReference databaseReference, List<Tarea> tareas) {
+        databaseReference.child("pisos").child("id").child("tareas").setValue(tareas);
+    }
+
+    public static void saveIntoFirebase(DatabaseReference databaseReference, List<Tarea> tareas, String key) {
+        databaseReference.child("pisos").child("id").child("tareas").setValue(tareas);
     }
 
 }

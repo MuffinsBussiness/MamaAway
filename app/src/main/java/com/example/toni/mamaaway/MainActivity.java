@@ -41,12 +41,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        List<Producto> productos = new ArrayList<Producto>();
-        Producto producto = new Producto("Leches", 5, "Cristian", 5.5);
-        productos.add(producto);
+        List<Producto> productos;
+        /*Producto producto = new Producto("Leches", 5, "Cristian", 5.5);
+        Producto producto1 = new Producto("Leches", 5, "Cristian", 6.5);
+        Producto producto2 = new Producto("Leches", 5, "Cristian", 7.5);
+        Producto producto3 = new Producto("Leches", 5, "Cristian", 8.5);
 
-        String key = myRef.child("productos").push().getKey();
-        myRef.child("productos").child(key).setValue(productos);
+        producto.setPaid(true);
+
+
+        productos.add(producto);
+        productos.add(producto1);
+        productos.add(producto2);
+        productos.add(producto3);
+
+        Producto.saveIntoFirebase(myRef,productos);*/
+
+        //productos = Producto.getList(database, "id", "-KwQ1VZ8ZKKVvfWKgUax");
+
+        /*productos = Producto.getList(database, "", "");
+
+        Log.d("MOCOO", String.valueOf(productos.get(0).getName()));*/
+
+        List<Tarea> tareas = new ArrayList<Tarea>();
+
+        Tarea tarea = new Tarea("Hello", "HELLO");
+        Tarea tarea1 = new Tarea("Hello1", "HELLO");
+        Tarea tarea2 = new Tarea("Hello2", "HELLO");
+        Tarea tarea3 = new Tarea("Hello3", "HELLO");
+        Tarea tarea4 = new Tarea("Hello4", "HELLO");
+
+        tareas.add(tarea);
+        tareas.add(tarea1);
+        tareas.add(tarea2);
+        tareas.add(tarea3);
+        tareas.add(tarea4);
+
+        Tarea.saveIntoFirebase(myRef,tareas);
+
+
 
     }
 }
