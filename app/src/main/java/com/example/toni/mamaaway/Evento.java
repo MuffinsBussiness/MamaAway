@@ -1,8 +1,14 @@
 package com.example.toni.mamaaway;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,6 +21,8 @@ public class Evento {
     String descripcion;
     Date fechaIni;
     Date fechaFin;
+
+    public Evento() {}
 
     public Evento(String titulo, String descripcion, Date fechaIni, Date fechaFin) {
         this.titulo = titulo;
@@ -62,4 +70,28 @@ public class Evento {
     public static void saveIntoFirebase(DatabaseReference databaseReference, List<Evento> eventos, String key) {
         databaseReference.child("pisos").child("id").child("eventos").setValue(eventos);
     }
+
+    ValueEventListener eventosEventListener = new ValueEventListener() {
+
+        /*DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("eventos");
+        myRef2.addValueEventListener(eventosEventListener);*/
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            Iterator<DataSnapshot> dataSnapshotsEventos = dataSnapshot.getChildren().iterator();
+
+            while (dataSnapshotsEventos.hasNext()) {
+                DataSnapshot dataSnapshotChild = dataSnapshotsEventos.next();
+                Evento TagName_Chosen = dataSnapshotChild.getValue(Evento.class);
+
+                Log.d("MOCO", TagName_Chosen.getTitulo());
+
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    };
 }

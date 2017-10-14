@@ -89,7 +89,7 @@ public class Tarea {
 
             while (dataSnapshotsTareas.hasNext()) {
                 DataSnapshot dataSnapshotChild = dataSnapshotsTareas.next();
-                Tarea TagName_Chosen = dataSnapshotChild.getValue(Tarea.class); // check here whether you are getting the TagName_Chosen
+                Tarea TagName_Chosen = dataSnapshotChild.getValue(Tarea.class);
 
             }
         }

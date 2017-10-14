@@ -96,24 +96,17 @@ public class MainActivity extends AppCompatActivity {
         Evento.saveIntoFirebase(myRef, eventos);*/
 
 
-        ValueEventListener productoEventListener = new ValueEventListener() {
+        ValueEventListener eventosEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Iterator<DataSnapshot> dataSnapshotsProductos = dataSnapshot.getChildren().iterator();
+                Iterator<DataSnapshot> dataSnapshotsEventos = dataSnapshot.getChildren().iterator();
 
-                while (dataSnapshotsProductos.hasNext()) {
-                    DataSnapshot dataSnapshotChild = dataSnapshotsProductos.next();
-                    if (dataSnapshotChild.hasChildren()) {
-                        Producto TagName_Chosen = dataSnapshotChild.getValue(Producto.class);
-                        Log.d("MOCO2", TagName_Chosen.getName());
-                    }
+                while (dataSnapshotsEventos.hasNext()) {
+                    DataSnapshot dataSnapshotChild = dataSnapshotsEventos.next();
+                    Evento TagName_Chosen = dataSnapshotChild.getValue(Evento.class);
 
-                    else {
-                        Double TagName_Chosen = dataSnapshotChild.getValue(Double.class);
-                        Log.d("MOCO",TagName_Chosen.toString());
-                    }
-
+                    Log.d("MOCO", TagName_Chosen.getTitulo());
 
                 }
             }
@@ -123,9 +116,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("listas").child("-KwRiLg-E3WthnSDRQLZ");
-
-        myRef2.addValueEventListener(productoEventListener);
+        DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("eventos");
+        myRef2.addValueEventListener(eventosEventListener);
 
 
     }
