@@ -156,5 +156,36 @@ public class Producto {
         return result;
     }
 
+    ValueEventListener productoEventListener = new ValueEventListener() {
+
+        /*DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("listas").child("-KwRiLg-E3WthnSDRQLZ");
+        myRef2.addValueEventListener(productoEventListener);*/
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            Iterator<DataSnapshot> dataSnapshotsProductos = dataSnapshot.getChildren().iterator();
+
+            while (dataSnapshotsProductos.hasNext()) {
+                DataSnapshot dataSnapshotChild = dataSnapshotsProductos.next();
+                if (dataSnapshotChild.hasChildren()) {
+                    Producto TagName_Chosen = dataSnapshotChild.getValue(Producto.class);
+                    Log.d("MOCO2", TagName_Chosen.getName());
+                }
+
+                else {
+                    Double TagName_Chosen = dataSnapshotChild.getValue(Double.class);
+                    Log.d("MOCO",TagName_Chosen.toString());
+                }
+
+
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    };
+
 
 }

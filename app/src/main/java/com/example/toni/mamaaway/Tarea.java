@@ -1,8 +1,16 @@
 package com.example.toni.mamaaway;
 
-import com.google.firebase.database.DatabaseReference;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -71,5 +79,24 @@ public class Tarea {
     public static void saveIntoFirebase(DatabaseReference databaseReference, List<Tarea> tareas, String key) {
         databaseReference.child("pisos").child("id").child("tareas").setValue(tareas);
     }
+
+
+    ValueEventListener tareaEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            Iterator<DataSnapshot> dataSnapshotsTareas = dataSnapshot.getChildren().iterator();
+
+            while (dataSnapshotsTareas.hasNext()) {
+                DataSnapshot dataSnapshotChild = dataSnapshotsTareas.next();
+                Tarea TagName_Chosen = dataSnapshotChild.getValue(Tarea.class); // check here whether you are getting the TagName_Chosen
+
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    };
 
 }

@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        List<Producto> productos;
-        /*Producto producto = new Producto("Leches", 5, "Cristian", 5.5);
+        /*List<Producto> productos = new ArrayList<>();
+        Producto producto = new Producto("Leches", 5, "Cristian", 5.5);
         Producto producto1 = new Producto("Leches", 5, "Cristian", 6.5);
         Producto producto2 = new Producto("Leches", 5, "Cristian", 7.5);
         Producto producto3 = new Producto("Leches", 5, "Cristian", 8.5);
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("MOCOO", String.valueOf(productos.get(0).getName()));*/
 
-        List<Tarea> tareas = new ArrayList<Tarea>();
+        /*List<Tarea> tareas = new ArrayList<Tarea>();
 
         Tarea tarea = new Tarea("Hello", "HELLO");
         Tarea tarea1 = new Tarea("Hello1", "HELLO");
@@ -79,6 +80,52 @@ public class MainActivity extends AppCompatActivity {
 
         Tarea.saveIntoFirebase(myRef,tareas);
 
+        List<Evento> eventos = new ArrayList<Evento>();
+
+        Date currentTime = Calendar.getInstance().getTime();
+        Evento evento = new Evento("Titulo", "Desc", currentTime, currentTime);
+        Evento evento2 = new Evento("Titulo2", "Desc", currentTime, currentTime);
+        Evento evento3 = new Evento("Titulo3", "Desc", currentTime, currentTime);
+        Evento evento4 = new Evento("Titulo4", "Desc", currentTime, currentTime);
+
+        eventos.add(evento);
+        eventos.add(evento2);
+        eventos.add(evento3);
+        eventos.add(evento4);
+
+        Evento.saveIntoFirebase(myRef, eventos);*/
+
+
+        ValueEventListener productoEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Iterator<DataSnapshot> dataSnapshotsProductos = dataSnapshot.getChildren().iterator();
+
+                while (dataSnapshotsProductos.hasNext()) {
+                    DataSnapshot dataSnapshotChild = dataSnapshotsProductos.next();
+                    if (dataSnapshotChild.hasChildren()) {
+                        Producto TagName_Chosen = dataSnapshotChild.getValue(Producto.class);
+                        Log.d("MOCO2", TagName_Chosen.getName());
+                    }
+
+                    else {
+                        Double TagName_Chosen = dataSnapshotChild.getValue(Double.class);
+                        Log.d("MOCO",TagName_Chosen.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+
+        DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("listas").child("-KwRiLg-E3WthnSDRQLZ");
+
+        myRef2.addValueEventListener(productoEventListener);
 
 
     }
