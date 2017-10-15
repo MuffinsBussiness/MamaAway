@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -94,4 +95,14 @@ public class Evento {
         public void onCancelled(DatabaseError databaseError) {
         }
     };
+
+    public static ArrayList<Evento> getRangedList(ArrayList<Evento> eventos, Date fechaIni, Date fechaFin) {
+        ArrayList<Evento> result = new ArrayList<>();
+        for(Evento evento : eventos) {
+            if (!evento.getFechaIni().before(fechaIni) && !evento.getFechaFin().before(fechaFin)) {
+                result.add(evento);
+            }
+        }
+        return result;
+    }
 }

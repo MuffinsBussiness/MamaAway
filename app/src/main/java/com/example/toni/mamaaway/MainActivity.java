@@ -116,8 +116,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("eventos");
-        myRef2.addValueEventListener(eventosEventListener);
+        //DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("eventos");
+        //myRef2.addValueEventListener(eventosEventListener);
+
+        Producto producto = new Producto();
+        producto.getList(database, "", "");
+        Log.d("MOCO3", String.valueOf(producto.result.isEmpty()));
+
+
 
 
     }

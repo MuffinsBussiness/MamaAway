@@ -80,6 +80,18 @@ public class Tarea {
         databaseReference.child("pisos").child("id").child("tareas").setValue(tareas);
     }
 
+    public static ArrayList<Tarea> getRangedList(ArrayList<Tarea> tareas, Date fechaIni, Date fechaFin) {
+        ArrayList<Tarea> result = new ArrayList<>();
+        for(Tarea tarea : tareas) {
+            if (tarea.getFechaInicio()!= null && tarea.getFechaFinal() !=null) {
+                if (!tarea.getFechaInicio().before(fechaIni) && !tarea.getFechaFinal().before(fechaFin)) {
+                    result.add(tarea);
+                }
+            }
+        }
+        return result;
+    }
+
 
     ValueEventListener tareaEventListener = new ValueEventListener() {
         @Override

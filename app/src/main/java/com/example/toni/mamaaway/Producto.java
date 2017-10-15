@@ -25,11 +25,8 @@ public class Producto {
     private boolean paid;
 
 
-    static ArrayList<Producto> result = new ArrayList<>();
 
-
-    public Producto() {
-    }
+    public Producto() {}
 
     public Producto(String name, int quantity, String owner, double price) {
         this.name = name;
@@ -128,35 +125,7 @@ public class Producto {
         return result;
     }
 
-    static ArrayList<Producto> getList(FirebaseDatabase database, String flatKey, String listKey) {
-        //DatabaseReference myRef = database.getReference("/pisos/id/listas/-KwQ1VZ8ZKKVvfWKgUax");
-        DatabaseReference myRef = database.getReference().child("pisos").child("id").child("listas").child("-KwQ1VZ8ZKKVvfWKgUax");
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterator<DataSnapshot> dataSnapshotsChat = dataSnapshot.getChildren().iterator();
-
-                while (dataSnapshotsChat.hasNext()) {
-                    DataSnapshot dataSnapshotChild = dataSnapshotsChat.next();
-                    result.add(dataSnapshotChild.getValue(Producto.class));
-                    //Producto TagName_Chosen = dataSnapshotChild.getValue(Producto.class); // check here whether you are getting the TagName_Chosen
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("MOCO", "Failed to read value.", databaseError.toException());
-            }
-        });
-
-        return result;
-    }
-
-    ValueEventListener productoEventListener = new ValueEventListener() {
+    public static ValueEventListener productoEventListener = new ValueEventListener() {
 
         /*DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("listas").child("-KwRiLg-E3WthnSDRQLZ");
         myRef2.addValueEventListener(productoEventListener);*/
@@ -186,5 +155,14 @@ public class Producto {
         public void onCancelled(DatabaseError databaseError) {
         }
     };
+
+    /*static ArrayList<Producto> getList(FirebaseDatabase database, String flatKey, String listKey) {
+        //DatabaseReference myRef = database.getReference("/pisos/id/listas/-KwQ1VZ8ZKKVvfWKgUax");
+
+        DatabaseReference myRef = database.getReference().child("pisos").child("id").child("listas").child("-KwRiLg-E3WthnSDRQLZ");
+        myRef.addValueEventListener(productoEventListener);
+
+        return result;
+    }*/
 
 }
