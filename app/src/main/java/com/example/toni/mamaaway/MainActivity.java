@@ -1,9 +1,16 @@
 package com.example.toni.mamaaway;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,10 +24,18 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    private static final String TAG = "MainActivity";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+
+    private String mUsername;
+    private String mPhotoUrl;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,12 +134,39 @@ public class MainActivity extends AppCompatActivity {
         //DatabaseReference myRef2 = database.getReference().child("pisos").child("id").child("eventos");
         //myRef2.addValueEventListener(eventosEventListener);
 
-        Producto producto = new Producto();
+        /*Producto producto = new Producto();
         producto.getList(database, "", "");
-        Log.d("MOCO3", String.valueOf(producto.result.isEmpty()));
+        Log.d("MOCO3", String.valueOf(producto.result.isEmpty()));*/
 
 
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in.
+        // TODO: Add code to check if user is signed in.
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
+        if(mFirebaseUser == null) {
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+            return;
+        } else {
+            mUsername = mFirebaseUser.getDisplayName();
+            if (mFirebaseUser.getPhotoUrl() != null) {
+                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            }
+        }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 }

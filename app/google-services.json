@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "307046951127-vbajjj66uhhkitulb3ssmd36lc6oktmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toni.mamaaway",
+            "certificate_hash": "c20721f08505d286c6d29e8a37ac36b7ec2f3c72"
+          }
+        },
+        {
           "client_id": "307046951127-i7ager88n6b1t9dp9106dfmo1j33r1d5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

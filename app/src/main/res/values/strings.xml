@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MamaAway</string>
+    <string name="sign_in">SignIn</string>
 </resources>
